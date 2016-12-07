@@ -2,9 +2,9 @@
 	require_once dirname(__FILE__)."/menu.php";
 	//require_once dirname(__FILE__).'/menu.config';
 
-	$username = "champon";
-	if (isset($_GET['username'])) {
-		$username = $_GET['username'];
+	$username = "";
+	if (isset($_REQUEST['username'])) {
+		$username = $_REQUEST['username'];
 	}
 	echo "user:".$username."<br>";
 ?>
@@ -52,19 +52,16 @@
 					$all 	= $_REQUEST['all'];
 					if ($all == "all")
 					{
-						printOrder($username);
-					}
-				}
-				else if (isset($_REQUEST['mine'])) {
-					$mine 	= $_REQUEST['mine'];
-
-					if ($mine == "mine")
-					{
-						printOrder($username);
+						printOrder();
 					}
 				}
 			}
 		}
+
+	    if(!empty($username))
+        {
+            printOrder($username);
+        }
 	}
 ?>
 
@@ -73,7 +70,7 @@
 <form name="input" action="test2.php?print=1" method="post">
 Print Order:
 <input type="text" value="<?php echo $username?>" name="username"/>
-<input type="submit" value="mine" name="mine"/>
+<!--input type="submit" value="mine" name="mine"/-->
 <input type="submit" value="all" name="all"/>
 </form>
 

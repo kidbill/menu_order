@@ -7,7 +7,7 @@ $GLOBALS['DB_IP']   = "localhost";
 $GLOBALS['DB_USER'] = "root";
 $GLOBALS['DB_PWD']  = "";
 $GLOBALS['DB_PORT']  = "3306";
-$GLOBALS['DB_SOCKET']  = "/data/lib/mysql/mysql.sock"; 
+$GLOBALS['DB_SOCKET']  = "";//"/data/lib/mysql/mysql.sock"; 
 
  class db_mysql
  {

@@ -1,4 +1,5 @@
 <?php
+    require_once dirname(__FILE__)."/menu.php";
 
 	function registe()
 	{
@@ -27,7 +28,15 @@
     	if ($result === FALSE) {
     		return "insert error<br>";
     	}
-    	header("Location: http://127.0.0.1/test2.php");
+        $db->db_cleanQuery(); 
+        $tableName = genMenuTableName(); 
+        
+        $sql = "insert into $tableName (name) values (\"$username\")";
+        $result = $db->db_query_select($sql);
+    	if ($result === FALSE) {
+    		return "insert error $result<br>";
+        }
+    	header("Location: http://192.168.1.42/test2.php?username=$username");
     	exit;
 	}
 
@@ -70,7 +79,7 @@
 	    //echo "dddd||".$kk."||";
 
 	    if (TRUE == $kk) {
-	       	header("Location: http://127.0.0.1/test2.php?username=$username");
+	       	header("Location: http://192.168.1.42/test2.php?username=$username");
 	       	return "<br>login:".json_encode($_POST);
 	       	exit;
 	    }

@@ -15,22 +15,24 @@
 		$tableName = genMenuTableName();
 
 		$sql = "CREATE TABLE $tableName (
-			id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-			name VARCHAR(100) NOT NULL,
-			Monday VARCHAR(100) NOT NULL,
-			Tuesday VARCHAR(100) NOT NULL,
-			Wednesday VARCHAR(100) NOT NULL,
-			Thursday VARCHAR(100) NOT NULL,
-			Friday VARCHAR(100) NOT NULL,
-			Saturday VARCHAR(100) NOT NULL,
-			Sunday VARCHAR(100) NOT NULL
-		)";
+                  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+                  `name` varchar(100) NOT NULL,
+                  `Monday` varchar(100) NOT NULL,
+                  `Tuesday` varchar(100) NOT NULL,
+                  `Wednesday` varchar(100) NOT NULL,
+                  `Thursday` varchar(100) NOT NULL,
+                  `Friday` varchar(100) NOT NULL,
+                  `Saturday` varchar(100) NOT NULL,
+                  `Sunday` varchar(100) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  UNIQUE KEY `name` (`name`) USING BTREE
+        ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;";
 
 		$result = $db->db_query_select($sql);
 		var_dump($result);
 		$sql = "insert into $tableName (name) select name from t_account";
 		$result = $db->db_query_select($sql);
-		var_dump($result);
+		//var_dump($result);
 
 	}
 
@@ -95,9 +97,11 @@
 			}
 		}
 
+        echo "Menu:$tableName";
+	//	var_dump($msgList);
+        $once = true;
 		foreach ($msgList as $key => $value) {
 			$arr = $value;
-
 			echo "<table border=\"1\">";
 
 			$title = "<tr>";
@@ -107,7 +111,11 @@
 				$title = $title."<th>".$arrkey."</th>";
 				$menu  = $menu."<td>".$arrvalue."</td>";
 			}
-			echo $title."</tr>";
+            if(true === $once)
+            {
+			    echo $title."</tr>";
+                $once = false;
+            }
 			echo $menu."</tr>";
 			echo "</table>";
 		}
@@ -118,6 +126,6 @@
 //	00 * * * */1 /usr/bin/php /root/diancan/menu.php
 	//printOrder();
 	//order("champon", "Friday", "麻婆豆腐")
-	createMenu();
+	//createMenu();
 ?>
 
